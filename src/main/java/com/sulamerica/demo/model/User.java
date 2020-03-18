@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.GeneratedValue;
 
 @Entity
@@ -16,9 +17,22 @@ public class User {
     private String cpf;
     private String sexo;
     private Date dataDeNascimento;
+    @OneToOne
     private Cargo cargo;
+    @OneToOne
     private Perfil perfil;
     private boolean active;
+
+    public User(String nome, String cpf, String sexo, Date dataDeNascimento, Cargo cargo, Perfil perfil,
+            boolean active) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.sexo = sexo;
+        this.dataDeNascimento = dataDeNascimento;
+        this.cargo = cargo;
+        this.perfil = perfil;
+        this.active = active;
+    }
 
     public int getId() {
         return id;
@@ -82,5 +96,11 @@ public class User {
 
     public void setActive(final boolean active) {
         this.active = active;
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", sexo=" + sexo + " cpf=" + cpf + ", dataDeNascimento=" + dataDeNascimento
+                + ", nome=" + nome + ", perfil=" + perfil + ", cargo=" + cargo + ", active=" + active + "]";
     }
 }

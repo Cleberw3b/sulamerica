@@ -12,6 +12,10 @@ public class Perfil {
     private int id;
     private String nome;
 
+    public Perfil(String nome) {
+        this.nome = nome;
+    }
+
     public int getId() {
         return id;
     }
@@ -26,5 +30,10 @@ public class Perfil {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "Perfil [id=" + id + ", nome=" + nome + "]";
     }
 }

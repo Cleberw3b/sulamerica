@@ -12,6 +12,10 @@ public class Cargo {
     private int id;
     private String nome;
 
+    public Cargo(String nome) {
+        this.nome = nome;
+    }
+
     public int getId() {
         return id;
     }
@@ -26,5 +30,10 @@ public class Cargo {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "Cargo [id=" + id + ", nome=" + nome + "]";
     }
 }
