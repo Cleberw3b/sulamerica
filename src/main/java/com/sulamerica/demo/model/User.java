@@ -1,6 +1,6 @@
 package com.sulamerica.demo.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,19 +12,20 @@ public class User {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
     private String nome;
     private String cpf;
     private String sexo;
-    private Date dataDeNascimento;
+    private LocalDate dataDeNascimento;
     @OneToOne
     private Cargo cargo;
     @OneToOne
     private Perfil perfil;
     private boolean active;
 
-    public User(String nome, String cpf, String sexo, Date dataDeNascimento, Cargo cargo, Perfil perfil,
-            boolean active) {
+    public User(Integer id, String nome, String cpf, String sexo, LocalDate dataDeNascimento, Cargo cargo,
+            Perfil perfil, boolean active) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.sexo = sexo;
@@ -34,11 +35,17 @@ public class User {
         this.active = active;
     }
 
-    public int getId() {
+    public boolean isEmpty() {
+        if (this.id > 0)
+            return false;
+        return true;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 
@@ -66,11 +73,11 @@ public class User {
         this.sexo = sexo;
     }
 
-    public Date getDataDeNascimento() {
+    public LocalDate getDataDeNascimento() {
         return dataDeNascimento;
     }
 
-    public void setDataDeNascimento(final Date dataDeNascimento) {
+    public void setDataDeNascimento(final LocalDate dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
 
@@ -101,6 +108,7 @@ public class User {
     @Override
     public String toString() {
         return "User [id=" + id + ", sexo=" + sexo + " cpf=" + cpf + ", dataDeNascimento=" + dataDeNascimento
-                + ", nome=" + nome + ", perfil=" + perfil + ", cargo=" + cargo + ", active=" + active + "]";
+                + ", nome=" + nome + ", perfil=" + perfil.getNome() + ", cargo=" + cargo.getNome() + ", active="
+                + active + "]";
     }
 }
