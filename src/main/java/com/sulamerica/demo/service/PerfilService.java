@@ -27,7 +27,7 @@ public class PerfilService {
         return perfis;
     }
 
-    public Perfil getPerfilById(int id) {
+    public Perfil getPerfilById(Integer id) {
         Perfil perfil = perfilRepository.findById(id).get();
         log.info("Perfil recuperado" + System.lineSeparator() + perfil.toString());
         return perfil;
@@ -38,7 +38,7 @@ public class PerfilService {
         perfilRepository.save(perfil);
     }
 
-    public void delete(int id) {
+    public void delete(Integer id) {
         log.info("Delentando perfil com ID=" + id);
         perfilRepository.deleteById(id);
     }

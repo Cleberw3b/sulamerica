@@ -27,7 +27,7 @@ public class CargoService {
         return cargos;
     }
 
-    public Cargo getCargoById(int id) {
+    public Cargo getCargoById(Integer id) {
         Cargo cargo = cargoRepository.findById(id).get();
         log.info("Cargo recuperado" + System.lineSeparator() + cargo.toString());
         return cargo;
@@ -38,7 +38,7 @@ public class CargoService {
         cargoRepository.save(cargo);
     }
 
-    public void delete(int id) {
+    public void delete(Integer id) {
         log.info("Delentando cargo com ID=" + id);
         cargoRepository.deleteById(id);
     }

@@ -25,12 +25,12 @@ public class CargoController {
     }
 
     @GetMapping("/cargos/{id}")
-    private Cargo getUser(@PathVariable("id") int id) {
+    private Cargo getUser(@PathVariable("id") Integer id) {
         return cargoService.getCargoById(id);
     }
 
     @DeleteMapping("/cargos/{id}")
-    private void deleteUser(@PathVariable("id") int id) {
+    private void deleteUser(@PathVariable("id") Integer id) {
         cargoService.delete(id);
     }
 

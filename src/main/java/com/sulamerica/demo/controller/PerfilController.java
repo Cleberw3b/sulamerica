@@ -25,12 +25,12 @@ public class PerfilController {
     }
 
     @GetMapping("/perfis/{id}")
-    private Perfil getUser(@PathVariable("id") int id) {
+    private Perfil getUser(@PathVariable("id") Integer id) {
         return perfilService.getPerfilById(id);
     }
 
     @DeleteMapping("/perfis/{id}")
-    private void deleteUser(@PathVariable("id") int id) {
+    private void deleteUser(@PathVariable("id") Integer id) {
         perfilService.delete(id);
     }
 
