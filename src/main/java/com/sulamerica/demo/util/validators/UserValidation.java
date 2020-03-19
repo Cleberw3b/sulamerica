@@ -1,7 +1,5 @@
 package com.sulamerica.demo.util.validators;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.InputMismatchException;
 
 import com.sulamerica.demo.model.User;
@@ -10,38 +8,17 @@ public class UserValidation {
     public static UserValidationResult isUserValid(User user) {
 
         UserValidationResult result = new UserValidationResult();
-        result.isValid = false;
         try {
-            if (user.getNome() == null || user.getNome().isEmpty()) {
-                result.errors.add("Nome não informado");
-            }
-            if (user.getCpf() == null || user.getCpf().isEmpty()) {
-                result.errors.add("CPF não informado");
-            }
             if (!isCPFValid(user.getCpf())) {
                 result.errors.add("CPF inválido");
             }
-            if (user.getSexo() == null || user.getSexo().isEmpty()) {
-                result.errors.add("Sexo não informado");
-            }
-            if (user.getDataDeNascimento() == null
-                    || Period.between(user.getDataDeNascimento(), LocalDate.now()).getDays() < 1) {
-                result.errors.add("Data de Nascimento invalida");
-            }
-            if (user.getCargo() == null || user.getCargo().getNome().isEmpty()) {
-                result.errors.add("Cargo não informado");
-            }
-            if (user.getPerfil() == null || user.getPerfil().getNome().isEmpty()) {
-                result.errors.add("Perfil não informado");
-            }
-
             if (result.errors.isEmpty()) {
                 result.isValid = true;
             }
             return result;
         } catch (Exception e) {
             result.isValid = false;
-            result.errors.add(e.getLocalizedMessage());
+            result.errors.add(e.getMessage());
             return result;
         }
     }

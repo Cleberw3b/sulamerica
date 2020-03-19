@@ -5,6 +5,16 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 import javax.persistence.GeneratedValue;
 
 @Entity
@@ -13,15 +23,38 @@ public class User {
     @Id
     @GeneratedValue
     private Integer id;
+
+    @NotBlank(message = "Nome não informado")
     private String nome;
+
+    @NotBlank(message = "CPF não informado")
     private String cpf;
+
+    @NotBlank(message = "Sexo não informado")
     private String sexo;
+
+    // Formatar a data para o padrão (dia/Mês/Ano)
+    @NotNull(message = "Data de Nascimento não informado")
+    @PastOrPresent(message = "Data deve ser no passado ou no presente")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dataDeNascimento;
+
     @OneToOne
+    @NotNull(message = "Cargo não informado")
     private Cargo cargo;
+
     @OneToOne
+    @NotNull(message = "Perfil não informado")
     private Perfil perfil;
+
+    @NotNull(message = "Status não informado")
     private boolean active;
+
+    public User() {
+        super();
+    }
 
     public User(Integer id, String nome, String cpf, String sexo, LocalDate dataDeNascimento, Cargo cargo,
             Perfil perfil, boolean active) {
@@ -33,12 +66,6 @@ public class User {
         this.cargo = cargo;
         this.perfil = perfil;
         this.active = active;
-    }
-
-    public boolean isEmpty() {
-        if (this.id > 0)
-            return false;
-        return true;
     }
 
     public Integer getId() {

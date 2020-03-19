@@ -2,6 +2,8 @@ package com.sulamerica.demo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.sulamerica.demo.model.Cargo;
 import com.sulamerica.demo.service.CargoService;
 
@@ -35,7 +37,7 @@ public class CargoController {
     }
 
     @PostMapping("/cargos")
-    private int saveUser(@RequestBody Cargo cargo) {
+    private int saveUser(@Valid @RequestBody Cargo cargo) {
         cargoService.saveOrUpdate(cargo);
         return cargo.getId();
     }

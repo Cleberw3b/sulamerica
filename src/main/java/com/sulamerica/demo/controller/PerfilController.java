@@ -2,6 +2,8 @@ package com.sulamerica.demo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.sulamerica.demo.model.Perfil;
 import com.sulamerica.demo.service.PerfilService;
 
@@ -35,7 +37,7 @@ public class PerfilController {
     }
 
     @PostMapping("/perfis")
-    private int saveUser(@RequestBody Perfil perfil) {
+    private int saveUser(@Valid @RequestBody Perfil perfil) {
         perfilService.saveOrUpdate(perfil);
         return perfil.getId();
     }
